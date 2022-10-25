@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="invalid_password">Invalid Password</string>
+    <string name="register">Register</string>
+    <string name="title_register_page">Please Completing Your Data...</string>
+    <string name="title_login_page">Login to continue...</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+</resources>
