@@ -13,6 +13,7 @@
     <string name="welcome">Welcome</string>
     <string name="next">Next</string>
     <string name="register_success">Successfully registered!</string>
+    <string name="taken">Email is already taken</string>
     <string name="login_now">Login now...</string>
     <string name="not_get_permission">Didnt get permission.</string>
     <string name="choose_picture">Choose a Picture</string>

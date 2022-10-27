@@ -3,12 +3,15 @@ package com.kikulabs.storyapp.ui.register
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -81,6 +84,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         registerViewModel.registerUser(name, email, password)
 
         registerViewModel.errorText.observe(this) {
+
             if (it == "false") {
                 AlertDialog.Builder(this).apply {
                     setTitle(getString(R.string.register_success))
@@ -98,6 +102,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     create()
                     show()
                 }
+            } else {
+                Toast.makeText(this@RegisterActivity,
+                    getString(R.string.taken),
+                    Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -106,6 +114,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.btn_register -> {
                 register()
+                val ims = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                ims.hideSoftInputFromWindow(v.windowToken, 0)
             }
         }
     }

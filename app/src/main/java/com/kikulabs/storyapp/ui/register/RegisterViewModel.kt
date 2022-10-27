@@ -18,19 +18,20 @@ class RegisterViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val errorText: LiveData<String> = _error
 
-    fun registerUser(name: String, email: String,password: String) {
+    fun registerUser(name: String, email: String, password: String) {
         _isLoading.value = true
         ApiConfig().getApiService().registerUser(name, email, password)
             .enqueue(object : Callback<RegisterResponse> {
                 override fun onResponse(
                     call: Call<RegisterResponse>,
-                    response: Response<RegisterResponse>
+                    response: Response<RegisterResponse>,
                 ) {
                     _isLoading.value = false
-                    if (response.isSuccessful) {
+                    if (!response.isSuccessful) {
                         _error.value = response.body()?.error.toString()
-                        Log.d("RETROFIT_TAG", response.body()?.message.toString())
                     }
+                    _error.value = response.body()?.error.toString()
+                    Log.d("RETROFIT_TAG", response.body()?.message.toString())
                 }
 
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
