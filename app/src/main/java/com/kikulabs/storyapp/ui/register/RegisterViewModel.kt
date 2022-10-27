@@ -18,6 +18,9 @@ class RegisterViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val errorText: LiveData<String> = _error
 
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
+
     fun registerUser(name: String, email: String, password: String) {
         _isLoading.value = true
         ApiConfig().getApiService().registerUser(name, email, password)
@@ -27,11 +30,15 @@ class RegisterViewModel : ViewModel() {
                     response: Response<RegisterResponse>,
                 ) {
                     _isLoading.value = false
+
+                    if (response.isSuccessful) {
+                        _error.value = response.body()?.error.toString()
+                        _message.value = response.body()?.message
+                    }
                     if (!response.isSuccessful) {
                         _error.value = response.body()?.error.toString()
+                        _message.value = response.message()
                     }
-                    _error.value = response.body()?.error.toString()
-                    Log.d("RETROFIT_TAG", response.body()?.message.toString())
                 }
 
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {

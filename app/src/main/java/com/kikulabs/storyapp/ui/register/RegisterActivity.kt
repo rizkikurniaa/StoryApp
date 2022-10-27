@@ -51,6 +51,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private fun initViewModel() {
         registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
         registerViewModel.isLoading.observe(this) { showLoading(it) }
+        registerViewModel.message.observe(this) { showMessage(it) }
     }
 
     private fun initListener() {
@@ -59,6 +60,12 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(this@RegisterActivity,
+            message,
+            Toast.LENGTH_SHORT).show()
     }
 
     private fun playAnimation() {
@@ -102,10 +109,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     create()
                     show()
                 }
-            } else {
-                Toast.makeText(this@RegisterActivity,
-                    getString(R.string.taken),
-                    Toast.LENGTH_SHORT).show()
             }
         }
     }

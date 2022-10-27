@@ -11,6 +11,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -69,6 +70,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         )[LoginViewModel::class.java]
 
         loginViewModel.isLoading.observe(this) { showLoading(it) }
+        loginViewModel.message.observe(this) { showMessage(it) }
     }
 
     private fun playAnimation() {
@@ -128,6 +130,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(this@LoginActivity,
+            message,
+            Toast.LENGTH_SHORT).show()
     }
 
     override fun onClick(v: View?) {

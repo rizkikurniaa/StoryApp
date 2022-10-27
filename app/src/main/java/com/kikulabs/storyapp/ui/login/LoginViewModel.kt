@@ -22,6 +22,9 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
+
 
     fun saveUser(user: UserModel) {
         viewModelScope.launch {
@@ -39,12 +42,13 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
                 ) {
                     _isLoading.value = false
                     if (response.isSuccessful) {
+                        _message.value = response.body()?.message
                         _userLogin.value = response.body()?.loginResult
-                        Log.d("RETROFIT_TAG", response.body()?.message.toString())
-                        Log.d("RETROFIT_TAG", response.body()?.loginResult?.token.toString())
-                        Log.d("RETROFIT_TAG", response.body()?.loginResult?.name ?: "name")
-                        Log.d("RETROFIT_TAG", response.body()?.loginResult?.userId ?: "userId")
                     }
+                    if (!response.isSuccessful) {
+                        _message.value = response.message()
+                    }
+
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
