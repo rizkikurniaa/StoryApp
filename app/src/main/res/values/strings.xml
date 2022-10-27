@@ -7,4 +7,23 @@
     <string name="title_login_page">Login to continue...</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="insert_email">Insert email</string>
+    <string name="insert_password">Insert password</string>
+    <string name="login_success">Login Success!</string>
+    <string name="welcome">Welcome</string>
+    <string name="next">Next</string>
+    <string name="register_success">Successfully registered!</string>
+    <string name="login_now">Login now...</string>
+    <string name="not_get_permission">Didnt get permission.</string>
+    <string name="choose_picture">Choose a Picture</string>
+    <string name="story_uploaded">Yeay, story uploaded!</string>
+    <string name="add_picture_first"> Please add the picture first...</string>
+    <string name="what_do_you_think">What do you think?</string>
+    <string name="user_ex">Rizki Kurniawan</string>
+    <string name="register_now">Register now</string>
+    <string name="not_a_member">Not a member?</string>
+    <string name="from_camera">From camera</string>
+    <string name="from_gallery">From Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="language">Language</string>
 </resources>

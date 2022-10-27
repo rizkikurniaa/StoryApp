@@ -2,17 +2,24 @@ package com.kikulabs.storyapp.ui.register
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.kikulabs.storyapp.R
 import com.kikulabs.storyapp.databinding.ActivityRegisterBinding
+import com.kikulabs.storyapp.ui.login.LoginActivity
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var registerViewModel: RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +27,8 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initView()
+        initViewModel()
+        initListener()
         playAnimation()
     }
 
@@ -36,6 +45,19 @@ class RegisterActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+    private fun initViewModel() {
+        registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
+        registerViewModel.isLoading.observe(this) { showLoading(it) }
+    }
+
+    private fun initListener() {
+        binding.btnRegister.setOnClickListener(this)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
     private fun playAnimation() {
         //fade in
         val logo = ObjectAnimator.ofFloat(binding.imageView, View.ALPHA, 1f).setDuration(500)
@@ -49,6 +71,42 @@ class RegisterActivity : AppCompatActivity() {
         AnimatorSet().apply {
             playSequentially(logo, title, name, email, password, register)
             start()
+        }
+    }
+
+    private fun register() {
+        val name = binding.edRegisterName.text.toString().trim()
+        val email = binding.edRegisterEmail.text.toString().trim()
+        val password = binding.edRegisterPassword.text.toString().trim()
+        registerViewModel.registerUser(name, email, password)
+
+        registerViewModel.errorText.observe(this) {
+            if (it == "false") {
+                AlertDialog.Builder(this).apply {
+                    setTitle(getString(R.string.register_success))
+                    setMessage(getString(R.string.login_now))
+                    setPositiveButton(getString(R.string.next)) { _, _ ->
+                        val intent = Intent(context, LoginActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent,
+                            ActivityOptionsCompat.makeSceneTransitionAnimation(this@RegisterActivity as Activity)
+                                .toBundle()
+                        )
+                        finish()
+                    }
+                    create()
+                    show()
+                }
+            }
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_register -> {
+                register()
+            }
         }
     }
 

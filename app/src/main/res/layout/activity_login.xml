@@ -137,7 +137,7 @@
             android:id="@+id/tv_not_a_member"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Not a member?" />
+            android:text="@string/not_a_member" />
 
         <TextView
             android:id="@+id/tv_register_now"
@@ -146,7 +146,7 @@
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
-            android:text="Register now"
+            android:text="@string/register_now"
             android:textColor="@color/blue"
             android:textStyle="bold" />
 

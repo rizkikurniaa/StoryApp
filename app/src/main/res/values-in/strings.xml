@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Story App</string>
+    <string name="invalid_email">Email Tidak Valid</string>
+    <string name="invalid_password">Password Tidak Valid</string>
+    <string name="register">Daftar</string>
+    <string name="title_register_page">Mohon lengkapi data anda...</string>
+    <string name="title_login_page">Masuk untuk melanjutkan...</string>
+    <string name="login">Masuk</string>
+    <string name="logout">Keluar</string>
+    <string name="insert_email">Masukkan email</string>
+    <string name="insert_password">Masukkan password</string>
+    <string name="login_success">Login Berhasil!</string>
+    <string name="welcome">Selamat datang</string>
+    <string name="next">Lanjut</string>
+    <string name="register_success">Berhasil Mendaftar!</string>
+    <string name="login_now">Masuk sekarang...</string>
+    <string name="not_get_permission">Tidak mendapatkan izin.</string>
+    <string name="choose_picture">Pilih gambar</string>
+    <string name="story_uploaded">Yeay, story diunggah!</string>
+    <string name="add_picture_first">Tambahkan gambar terlebih dahulu...</string>
+    <string name="what_do_you_think">Apa yang Anda pikirkan?</string>
+    <string name="user_ex">Rizki Kurniawan</string>
+    <string name="register_now">Daftar sekarang</string>
+    <string name="not_a_member">Bukan member?</string>
+    <string name="from_camera">Dari kamera</string>
+    <string name="from_gallery">Dari Galeri</string>
+    <string name="upload">Unggah</string>
+    <string name="language">Bahasa</string>
+</resources>

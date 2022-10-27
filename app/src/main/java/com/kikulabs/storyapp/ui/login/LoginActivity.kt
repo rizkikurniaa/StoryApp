@@ -92,10 +92,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         val password = binding.edLoginPassword.text.toString().trim()
         when {
             email.isEmpty() -> {
-                binding.tilEmail.error = "Masukkan email"
+                binding.tilEmail.error = getString(R.string.insert_email)
             }
             password.isEmpty() -> {
-                binding.tilPassword.error = "Masukkan password"
+                binding.tilPassword.error = getString(R.string.insert_password)
             }
             else -> {
                 loginViewModel.loginUser(email, password)
@@ -103,9 +103,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     binding.progressBar.visibility = View.VISIBLE
                     if (it != null) {
                         AlertDialog.Builder(this).apply {
-                            setTitle("Berhasil login")
-                            setMessage("Selamat Datang, ${it.name}!")
-                            setPositiveButton("Lanjut") { _, _ ->
+                            setTitle(getString(R.string.login_success))
+                            setMessage("${getString(R.string.welcome)}, ${it.name}!")
+                            setPositiveButton(getString(R.string.next)) { _, _ ->
                                 val intent = Intent(context, MainActivity::class.java)
                                 intent.flags =
                                     Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -118,7 +118,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                             create()
                             show()
                         }
-                        loginViewModel.saveUser(UserModel(it.name, it.token, it.userId, true))
+                        loginViewModel.saveUser(UserModel(it.userId, it.name, it.token, true))
                     }
 
                 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.kikulabs.storyapp.data.model.UserPreference
 import com.kikulabs.storyapp.ui.login.LoginViewModel
 import com.kikulabs.storyapp.ui.main.MainViewModel
+import com.kikulabs.storyapp.ui.story.AddStoryViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
 
@@ -14,11 +15,11 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(pref) as T
             }
-//            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
-//                SignupViewModel(pref) as T
-//            }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
+                AddStoryViewModel(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

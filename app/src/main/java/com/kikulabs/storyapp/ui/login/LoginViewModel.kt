@@ -35,7 +35,7 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
             .enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(
                     call: Call<LoginResponse>,
-                    response: Response<LoginResponse>
+                    response: Response<LoginResponse>,
                 ) {
                     _isLoading.value = false
                     if (response.isSuccessful) {
@@ -46,6 +46,7 @@ class LoginViewModel(private val pref: UserPreference) : ViewModel() {
                         Log.d("RETROFIT_TAG", response.body()?.loginResult?.userId ?: "userId")
                     }
                 }
+
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     _isLoading.value = false
                     Log.d("RETROFIT_TAG", t.message.toString())
