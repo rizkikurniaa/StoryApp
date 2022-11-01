@@ -13,7 +13,6 @@
     <string name="welcome">Selamat datang</string>
     <string name="next">Lanjut</string>
     <string name="register_success">Berhasil Mendaftar!</string>
-    <string name="taken">Email telah digunakan</string>
     <string name="login_now">Masuk sekarang...</string>
     <string name="not_get_permission">Tidak mendapatkan izin.</string>
     <string name="choose_picture">Pilih gambar</string>
